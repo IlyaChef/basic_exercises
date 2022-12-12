@@ -12,7 +12,16 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+
+names = {}
+
+for student in students:
+    if student['first_name'] not in names.keys():
+        names[student['first_name']] = 1
+    else:
+        names[student['first_name']] += 1
+for name, count in names.items():
+    print(f'{name}: {count}')
 
 
 # Задание 2
@@ -26,8 +35,18 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+names = {}
 
+for student in students:
+    if student['first_name'] not in names.keys():
+        names[student['first_name']] = 1
+    else:
+        names[student['first_name']] += 1
+max_qty = max(names.values())
+
+for name, count in names.items():
+    if count == max_qty:
+        print(f'Самое частое имя среди учеников: {name}')
 
 # Задание 3
 # Есть список учеников в нескольких классах, нужно вывести самое частое имя в каждом классе.
@@ -51,7 +70,15 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+class_number = 1
+for students in school_students:
+    names = [i["first_name"] for i in students]
+    names_qty = {name: names.count(name) for name in names}
+    max_count = max(names_qty.values())
+    for name, count in names_qty.items():
+        if count == max_count:
+            print(f'Самое частое имя в классе {class_number}: {name}')
+            class_number += 1
 
 
 # Задание 4
@@ -72,7 +99,18 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+for pupils in school:
+    boys_count = 0
+    girl_count = 0
+    for student in pupils['students']:
+        for name in student.values():
+            if is_male[name]:
+                boys_count += 1
+            else:
+                girl_count += 1
+            
+
+    print(f"Класс {pupils['class']}: девочки {girl_count}, мальчики {boys_count}")
 
 
 # Задание 5
@@ -91,5 +129,18 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
+for pupils in school:
+    boys_count = 0
+    girl_count = 0
+    for student in pupils['students']:
+        for name in student.values():
+            if is_male[name]:
+                boys_count += 1
+            else:
+                girl_count += 1
+    if boys_count > girl_count:
+        print(f'Больше всего мальчиков в классе {pupils["class"]}')
+    elif girl_count > boys_count:
+        print(f'Больше всего девочек в классе {pupils["class"]}')
+        
 
